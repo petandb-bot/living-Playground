@@ -1,5 +1,10 @@
 # LIVING PLAYGROUND — 基本設計 v0.1
 
+> **2026-11-17 / α実装状況:** [v0.1.0-alpha.1](../README.md)としてTHUMP / CHIRP / TICK、限定的LINK、16ステップの疎な反復、局所MUTATE／UNDO、Bug 1体、ピクセルPLAYFIELDを試作済み。主要な音響テスト11件と静的ビルドは成功。音楽的な好みの評価、iPhone Safariでの実機演奏、録音機能は未検証・未実装です。最初の段階は依存ライブラリのない**ブラウザES Modules + Web Audio + Canvas 2D**で構成し、規模や性能要件に応じてTypeScript等を導入します。視覚指針は[ART_DIRECTION.md](ART_DIRECTION.md)を優先します。
+>
+> **優先順位:** 音の面白さ・演奏しやすさ → チップ同士の音楽的な相互作用 → 画面の楽しさ → 装飾の完成度。1980年代〜1990年代前半のCGの創意工夫から学びつつ、既存ゲームの素材や画面を模倣しません。グラフィックは試奏後に段階的に調整します。
+
+
 **Status:** concept / architecture approved for a first playable prototype; no code implementation yet  
 **Repository:** https://github.com/petandb-bot/living-Playground (public)  
 **Baseline references:** WRONG NUMBER / SIGNAL MACHINES v0.27.0
