@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+ <meta charset="utf-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+ <meta name="theme-color" content="#10172a">
+ <meta name="description" content="A tiny musical playground. Tap little machines, connect sounds and watch curious bugs explore the signals.">
+ <title>LIVING PLAYGROUND — First Playable</title>
+ <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+ <main class="shell">
+  <header class="brandbar">
+   <div class="identity"><span class="insignia" aria-hidden="true">◈</span><span><strong>LIVING<span class="submark">//</span>PLAYGROUND</strong><small>SMALL MACHINES · STRANGE MUSIC</small></span></div>
+   <span class="version">001 / FIRST PLAYABLE</span>
+  </header>
+  <div class="panel screen-panel">
+   <div class="panel-title"><span class="pilot-light" aria-hidden="true"></span><span>PLAYFIELD / 01</span><span id="status" aria-live="polite">READY · PLAY OR TAP A CHIP</span></div>
+   <canvas id="stage" width="480" height="300" aria-label="Pixel playfield: tap sound chips, drag by their title bars, or pick up the small bug" role="img"></canvas>
+   <div class="playfield-footer"><span>CHIP HEADER = MOVE</span><span>BUG = PICK UP &amp; DROP</span><span>LINK = MAKE RELATION</span></div>
+  </div>
+  <div class="transport panel" role="group" aria-label="Music playback controls">
+   <button id="play" class="primary" aria-pressed="false">▶ PLAY</button>
+   <div class="tempo"><button id="tempo-down" aria-label="Slower tempo">−</button><span id="tempo-readout">106 BPM</span><button id="tempo-up" aria-label="Faster tempo">+</button></div>
+   <button id="new" title="Regenerate a motif without losing chip connections">NEW</button>
+   <button id="mutate" title="Change part of the phrase while preserving the musical anchors">MUTATE</button>
+   <button id="undo" title="Undo the last change">↶</button>
+  </div>
+  <div class="control-row">
+   <div class="chip-select panel"><span class="section-label">TOUCH A CHIP</span><div id="chip-list" aria-label="Accessible chip selectors"></div></div>
+   <div class="link-group panel"><button id="link" aria-pressed="false">◇ LINK</button><button id="add">＋ CHIP</button>
+    <div id="add-menu" hidden><button data-add="THUMP">＋ THUMP</button><button data-add="CHIRP">＋ CHIRP</button></div>
+   </div>
+  </div>
+  <section class="inspector panel" aria-label="Selected chip controls">
+   <div class="inspector-heading"><span>INSPECTOR</span><strong id="inspector-type">CHIRP</strong><button id="help" aria-label="Open instructions">? HELP</button></div>
+   <div class="dials"><label for="param-0"><span id="param-label-0">TUNE</span><input id="param-0" type="range" min="0" max="100" step="1"><output id="param-value-0">48</output></label>
+   <label for="param-1"><span id="param-label-1">BEND</span><input id="param-1" type="range" min="0" max="100" step="1"><output id="param-value-1">45</output></label></div>
+  </section>
+  <div class="messagebar"><span class="star">✳</span><span id="message" aria-live="polite">TAP A CHIP, MAKE A CONNECTION</span><span class="saved">AUTO SAVE</span></div>
+  <section class="help-panel panel" id="help-panel" hidden aria-label="How to play">
+   <div class="inspector-heading"><strong>HOW TO PLAY</strong><button id="help-close">CLOSE ×</button></div>
+   <p><b>PLAY</b> starts a sparse 16-step groove. <b>Tap</b> a sound chip to play immediately. Drag a chip by its colored nameplate to move it.</p>
+   <p><b>LINK</b>, then choose source and destination. TICK sends musical events; THUMP and CHIRP can affect each other's next sound.</p>
+   <p><b>BUG</b> walks between linked chips. Drag and drop the Bug onto a chip to make it knock. Bugs never change the music on their own.</p>
+   <p><b>MUTATE / UNDO</b> reshapes a few details without removing the beat. The browser saves your playfield locally. Recording and WAV export are planned for a later milestone.</p>
+  </section>
+  <footer class="foot">AN UNFINISHED MUSICAL ECOSYSTEM <span>◆</span> ORIGINAL PIXEL ART / LIVE SYNTHESIS</footer>
+ </main>
+ <script type="module" src="./src/main.js"></script>
+</body>
+</html>

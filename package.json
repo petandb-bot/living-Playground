@@ -1,0 +1,12 @@
+{
+  "name":"living-playground",
+  "version":"0.1.0-alpha.1",
+  "private":true,
+  "type":"module",
+  "description":"Tiny electronic music machines and musical bugs — a first playable study",
+  "scripts":{
+    "test":"node --test tests/*.test.js",
+    "check":"node --check src/music.js && node --check src/audio.js && node --check src/visuals.js && node --check src/main.js",
+    "build":"node scripts/build.mjs"
+  }
+}
