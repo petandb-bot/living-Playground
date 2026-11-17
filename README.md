@@ -1,60 +1,53 @@
 # LIVING PLAYGROUND
 
-*A small electronic music world inhabited by tiny machines and curious bugs.*
+*A small world of musical machines and curious bugs.*
 
-LIVING PLAYGROUND is a playful browser instrument. You place a handful of sound chips on a stage, connect them to create musical relationships, and perform by tapping, holding, and moving things. Small original creatures walk along connections, investigate sounds, and react to the machine's activity.
+**Status: v0.1.0-alpha.1 — first playable study.** The code is on a feature branch while we test the music and interactions. No public production release or iPhone Safari real-device test has been completed.
 
-It is **not** a traditional modular synthesizer, a puzzle game, a 1980s arcade-game replica, or a generative screensaver. The primary activity is making music; watching and interacting with the little world should make that activity more inviting.
+LIVING PLAYGROUND is a small browser instrument. Tap the electronic chips, connect them into musical relationships, and watch a little creature explore those connections. The goal is not to reproduce a modular synthesizer or a retro videogame. The goal is a playful world where **simple actions make interesting music**.
 
-## Design principles
+## First-playable controls
 
-1. **Simple pieces, surprising relationships.** Every chip is meaningful alone. Putting two or three together produces behavior worth exploring; the player should not need to learn signal routing to start.
-2. **A musical foothold.** Rhythm, rests, pitch neighborhoods, and short remembered motives make a patch usable. Complexity is introduced by interaction rather than by endless random notes.
-3. **Strange but playable sound.** Bent FM, plastic/rubber percussion, synthetic syllables, warped grains and occasionally uncomfortable timbres are welcome. Unwanted clicks, DC buildup, runaway feedback and clipping are not.
-4. **The screen has a reason to move.** Musical events affect the bugs and chip animations. Autonomous visual life has no hidden effect on sound unless explicitly enabled.
-5. **User agency and reversibility.** Touch produces immediate, predictable intent even when its sonic outcome is unusual. Record, mutate, undo, save and return.
-6. **Lightweight, clear, mobile-first.** A high-resolution interpretation of early arcade playfields, not enlarged coarse pixel art or recognisable game characters.
+- **PLAY / STOP**: start or stop an intentionally spacious 16-step groove.
+- **THUMP**: rubber-bodied, hollow and FM percussion. Tap the colored chip body, or hold and repeat manually. Two controls: FORCE / HOLLOW.
+- **CHIRP**: bent FM pitch and unusual overtone fragments. Tap or play from TICK. Two controls: TUNE / BEND.
+- **TICK**: musical clock. Connect it to a voice to give that voice a repeatable phrase. Two controls: DENSITY / SWING.
+- **LINK**: choose a source chip and then a destination. TICK→voice creates events. Voice→voice creates a temporary musical influence on the other voice's next sound. Clicking an existing link pair again removes it. No unbounded feedback.
+- **MUTATE / UNDO**: vary part of the motif and return to an earlier state. A few rhythmic anchors remain. **NEW** creates another motif while preserving links and chip positions.
+- **BUG**: follows chip connections and reacts to musical events. Drag it onto a sound chip to make it knock. Autonomous wandering **never changes the audio**.
+- **Chip nameplate**: drag to move a chip. **+ CHIP**: add a fourth THUMP or CHIRP. Selection reveals two simple controls.
 
-## Initial musical vocabulary
+The first-playable alpha begins with THUMP, CHIRP, TICK and a single Bug. MUMBLE, MUTANT, NEST, full recording and WAV export are **planned, not implemented**. The scene is saved in browser local storage (not synced between devices). Audio starts after a user gesture.
 
-The first build targets **six chip roles**, not 68 modules:
+## Development
 
-| Chip | Plays / changes | Primary gesture |
-| --- | --- | --- |
-| THUMP | Rubber-bodied percussion: FM thuds, knocks, dry clicks | Tap / hold to change force and decay |
-| CHIRP | Bent pitched electronics, small FM creatures, awkward harmonics | Tap / slide to bend pitch |
-| MUMBLE | Short synthetic syllables and metallic vocal fragments | Tap / hold to alter articulation |
-| TICK | Pulse and sparse rhythmic event patterns, with gaps | Tap to vary density, hold for a temporary change |
-| MUTANT | Selectable stutter / reverse / tape-bend / crush transformation | Touch to preview a change; release to return |
-| NEST | Remember recent events and return them as a short motif | Capture, replay and gently mutate |
+No external JavaScript dependencies are needed for the current prototype. Browser-native ES modules, Web Audio and Canvas 2D deliberately reduce overhead while the sound and interaction design are evolving.
 
-This is a **design target**, not a claim that these chips are implemented. Start with THUMP, CHIRP, TICK and one Bug; add MUMBLE, MUTANT and NEST incrementally.
+```sh
+npm test
+npm run check
+npm run build
+python3 -m http.server 8080
+```
 
-## The stage
+Open `http://localhost:8080`. For mobile tests use an HTTPS deployment, or an approved local development environment; audio APIs may need a secure context. `dist/` contains a static copy suitable for a static host. The project has no backend.
 
-- A single canvas shows a few movable chips and their visible relationships. Initially cap the simultaneous active set at **four chips**.
-- Tap a sound chip to play. A selected chip exposes no more than **two primary controls**; deeper options remain hidden.
-- Create a relationship intentionally using a small **LINK** affordance, then tap another chip. The stage draws a visible route that creatures can traverse. Moving chips alone must not silently change routing.
-- Link meaning is role-based: **TICK → voice** sends events, **voice → MUTANT** processes audio, **voice → NEST** records musical events, **NEST → voice** replays them. Unsupported links do not activate.
-- A playable scene is always available at first launch. Audio starts only after a user gesture.
+**Quick audition without a local web server:** `npm run build` also generates `dist/preview.html` — a self-contained file with the exact audio, music and visual modules inlined. Download the GitHub Actions `living-playground-alpha` artifact, unzip it and open `preview.html` in Chrome or Edge. Local browser storage may be unavailable from a file URL; the hosted ES-module version is the canonical source for persistent sessions. This is a prototype for listening, not a public production deployment.
 
-## Tiny inhabitants
+## Design
 
-Bugs are original animated characters, **not** sprites or layouts copied from known arcade games. They may wander, ride a line, inspect a chip, knock, pause, carry a fragment or react to a transient. Their movement combines real musical events, local goals and slow autonomous behavior.
+- [Full architecture and development milestones](docs/DESIGN.md)
+- [Pixel-art direction: early computer graphics, 1980–1993](docs/ART_DIRECTION.md)
+- [First playable scope and limitations](docs/FIRST_PLAYABLE.md)
 
-In v0.1 the bugs **respond to the audio world** but cannot silently modify the sound. Dragging a Bug onto a compatible chip may trigger an explicit performance action; future mischievous autonomous influence must be opt-in, limited and undoable.
+### Musical references
 
-## Audio references and reuse
+[WRONG NUMBER](https://github.com/petandb-bot/wrong-number) — deliberate gaps, unusual FM/voice-like timbres, live mutation, reversible changes, sparse patterns. Especially ROTTEN CARROT and TOY MALFUNCTION.
 
-- [WRONG NUMBER](https://github.com/petandb-bot/wrong-number): prioritize the *ROTTEN CARROT*, *TOY MALFUNCTION* and *BAD SPELLING* voice ideas, synthesized sound recipes, sparse beat generation, MUTATE/UNDO, and stutter/reverse/tape/crush methods.
-- [SIGNAL MACHINES](https://github.com/petandb-bot/signal-machines-v1): selectively adapt reliable audio scheduling, master safety, recording, resonant processes, pitch relationships, deterministic testing, and the distinction between intentional roughness and defects.
-- Do **not** copy full applications, 68 module systems, old UI layouts, 16-pad layout, recognizable sprites, third-party assets or unreviewed dependencies. Audit provenance and any applicable third-party notices before importing source.
+[SIGNAL MACHINES](https://github.com/petandb-bot/signal-machines-v1) — stable musical event handling, selective pitch constraints, safe output, and signal relationships. Its 68-module architecture is **not** being ported as a whole.
 
-## Project status
+### Visual approach
 
-**Architecture / concept stage. No application implementation has started.**
+Early home-computer and arcade-era creativity, around **1980–1993**, interpreted as a coherent original screen system: precise pixels, restricted color palettes, procedural patterns, chip surfaces, an original walking Bug, and animated signal routes. No recognizable characters, stage maps, or copyrighted sprites are copied from historic games.
 
-Detailed design, interaction model, phased plan and acceptance criteria:
-[docs/DESIGN.md](docs/DESIGN.md).
-
-The repository is intentionally public. Source code, documentation and original artwork can be shared here when ready.
+The **music comes first**. Graphic complexity should justify itself by making the instrument easier or more rewarding to play.
