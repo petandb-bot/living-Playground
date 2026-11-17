@@ -20,7 +20,7 @@
 ## Checks actually performed
 
 - Node unit tests for rhythm anchors, regeneration, mutation, MIDI-style pitch choices, connection rules, scene validation, audio parameter ranges and rendering world behavior.
-- JavaScript syntax checks and static build, dependency-free.
+- JavaScript syntax checks and static build, dependency-free; build also produces a standalone, self-contained `preview.html` for local audition.
 - Chromium headless smoke: startup, PLAY, MUTATE, UNDO, LINK; checked for page errors and mobile 390px horizontal overflow. No listening-quality evaluation possible from automated tests.
 
 ## Next steps
