@@ -32,6 +32,8 @@ python3 -m http.server 8080
 
 Open `http://localhost:8080`. For mobile tests use an HTTPS deployment, or an approved local development environment; audio APIs may need a secure context. `dist/` contains a static copy suitable for a static host. The project has no backend.
 
+**Quick audition without a local web server:** `npm run build` also generates `dist/preview.html` — a self-contained file with the exact audio, music and visual modules inlined. Download the GitHub Actions `living-playground-alpha` artifact, unzip it and open `preview.html` in Chrome or Edge. Local browser storage may be unavailable from a file URL; the hosted ES-module version is the canonical source for persistent sessions. This is a prototype for listening, not a public production deployment.
+
 ## Design
 
 - [Full architecture and development milestones](docs/DESIGN.md)
